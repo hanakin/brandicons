@@ -7,9 +7,9 @@
     "test": ""
   },
   "repository": {
-   "type": "git",
-   "url": "git+https://github.com/hanakin/brandicons.git"
- },
+    "type": "git",
+    "url": "git+https://github.com/hanakin/brandicons.git"
+  },
   "keywords": [
     "icons",
     "brand",
@@ -21,9 +21,9 @@
   "author": "hanakin (michael miday)",
   "license": "MIT",
   "bugs": {
-  "url": "https://github.com/hanakin/brandicons/issues"
-},
-"homepage": "https://github.com/hanakin/brandicons#readme",
+    "url": "https://github.com/hanakin/brandicons/issues"
+  },
+  "homepage": "https://github.com/hanakin/brandicons#readme",
   "dependencies": {
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.0",
@@ -34,5 +34,8 @@
     "gulp-svgo": "^1.0.3",
     "gulp-svgstore": "^6.0.0",
     "gulp-swig": "^0.8.0"
+  },
+  "devDependencies": {
+    "gulp-changed": "^1.3.0"
   }
 }

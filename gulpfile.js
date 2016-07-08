@@ -1,14 +1,15 @@
-var path   = require('path'),
-    fs     = require('fs'),
+var path        = require('path'),
+    fs          = require('fs'),
     // del    = require('del'),
-    gulp   = require('gulp'),
-    ap     = require('gulp-autoprefixer'),
-    sass   = require('gulp-scss'),
-    rename = require('gulp-rename'),
-    smaps  = require('gulp-sourcemaps'),
-    csso   = require('gulp-csso'),
-    svgo   = require('gulp-svgo'),
-    svgstore   = require('gulp-svgstore'),
+    gulp        = require('gulp'),
+    ap          = require('gulp-autoprefixer'),
+    sass        = require('gulp-scss'),
+    rename      = require('gulp-rename'),
+    smaps       = require('gulp-sourcemaps'),
+    csso        = require('gulp-csso'),
+    changed     = require('gulp-changed'),
+    svgo        = require('gulp-svgo'),
+    svgstore    = require('gulp-svgstore'),
     svgSettings = require('./svgo.json');
 
 var AUTOPREFIXER_BROWSERS = [
@@ -92,6 +93,7 @@ gulp.task('css', function(){
 gulp.task('svgo', function(){
     'use strict';
     gulp.src('icons/development/*.svg')
+        .pipe(changed('icons/production'))
         .pipe(svgo(svgSettings))
         .pipe(gulp.dest('icons/production'));
 });
