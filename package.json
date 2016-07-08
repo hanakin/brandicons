@@ -1,11 +1,15 @@
 {
   "name": "brandicons",
   "version": "1.0.0",
-  "description": "material design compatible brand & social icons",
+  "description": "a set of brand  &amp; social icons made to fit and mirror the google material design icons. These icons are meant to be coupled with the MDI to offset the lack of brand &amp; social options.",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "gulp"
+    "test": ""
   },
+  "repository": {
+   "type": "git",
+   "url": "git+https://github.com/hanakin/brandicons.git"
+ },
   "keywords": [
     "icons",
     "brand",
@@ -16,6 +20,10 @@
   ],
   "author": "hanakin (michael miday)",
   "license": "MIT",
+  "bugs": {
+  "url": "https://github.com/hanakin/brandicons/issues"
+},
+"homepage": "https://github.com/hanakin/brandicons#readme",
   "dependencies": {
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.0",
