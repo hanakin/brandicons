@@ -39,8 +39,7 @@
         { "sortAttrs": true },
         { "transformsWithOnePath": false },
         { "removeAttrs": false },
-        { "removeStyleElement": false },
-        { "addClassesToSVGElement": false }
+        { "removeStyleElement": false }
     ],
     "js2svg": {
         "pretty": true,
