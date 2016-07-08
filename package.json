@@ -1,0 +1,30 @@
+{
+  "name": "brandicons",
+  "version": "1.0.0",
+  "description": "material design compatible brand & social icons",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "gulp"
+  },
+  "keywords": [
+    "icons",
+    "brand",
+    "social",
+    "material",
+    "goolge",
+    "design"
+  ],
+  "author": "hanakin (michael miday)",
+  "license": "MIT",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-csso": "^2.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-scss": "^1.4.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-svgo": "^1.0.3",
+    "gulp-svgstore": "^6.0.0",
+    "gulp-swig": "^0.8.0"
+  }
+}
