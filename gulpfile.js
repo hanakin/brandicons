@@ -8,7 +8,8 @@ var path   = require('path'),
     smaps  = require('gulp-sourcemaps'),
     csso   = require('gulp-csso'),
     svgo   = require('gulp-svgo'),
-    svgstore   = require('gulp-svgstore');
+    svgstore   = require('gulp-svgstore'),
+    svgSettings = require('./svgo.json');
 
 var AUTOPREFIXER_BROWSERS = [
     'ie >= 11',
@@ -91,12 +92,7 @@ gulp.task('css', function(){
 gulp.task('svgo', function(){
     'use strict';
     gulp.src('icons/development/*.svg')
-        .pipe(svgo({
-            js2svg: {
-                pretty: true,
-                indent: '    '
-            }
-        }))
+        .pipe(svgo(svgSettings))
         .pipe(gulp.dest('icons/production'));
 });
 
