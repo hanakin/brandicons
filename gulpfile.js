@@ -101,6 +101,7 @@ gulp.task('svgo', function(){
 gulp.task('svg-store', function(){
     'use strict';
     gulp.src('icons/production/*.svg')
+        .pipe(changed('docs/views'))
         .pipe(svgstore())
         .pipe(rename({
             basename: 'icons',
