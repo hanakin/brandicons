@@ -1,8 +1,7 @@
 var path        = require('path'),
     fs          = require('fs'),
-    // del    = require('del'),
     gulp        = require('gulp'),
-    ap          = require('gulp-autoprefixer'),
+    prefix      = require('gulp-autoprefixer'),
     sass        = require('gulp-scss'),
     rename      = require('gulp-rename'),
     smaps       = require('gulp-sourcemaps'),
@@ -12,7 +11,8 @@ var path        = require('path'),
     svgstore    = require('gulp-svgstore'),
     svgSettings = require('./svgo.json');
 
-var AUTOPREFIXER_BROWSERS = [
+// Config
+var BROWSERS = [
     'ie >= 11',
     'edge >= 20',
     'ff >= 40',
@@ -20,56 +20,31 @@ var AUTOPREFIXER_BROWSERS = [
     'safari >= 8',
     'opera >= 35',
     'ios >= 8'
+],
+STYLE = [
+    SCSS = 'docs/assets/scss/',
+    CSS = 'docs/assets/css'
+],
+MINIFY = true,
+ICONS = [
+    DEV = 'icons/development/*',
+    PRO = 'icons/production',
+    VIEW = 'docs/views'
 ];
-
-var icons = [
-    {
-        name: 'test',
-        icon: 'contents'
-    }
-];
-
-// Config
-var guide = {
-    css: 'guide/assets/css',
-    fonts: 'guide/assets/fonts',
-    imgs: 'guide/assets/imgs',
-    js: 'guide/assets/js'
-};
-
-var theme = {
-    css: 'docs/assets/css',
-    fonts: 'docs/assets/fonts',
-    imgs: 'docs/assets/imgs',
-    js: 'docs/assets/js'
-};
-
-var minify = true;
-
-var buildIcons = function(){
-    // get file
-
-    // get filename
-    var filename;
-
-    // convert to symbol
-    // add id
-}
-
 
 var render = function(layer){
     'use strict';
 
     var css = gulp
-        .src('./guide/assets/scss/' + layer + '.scss')
+        .src(STYLE.SCSS + layer + '.scss')
         .pipe(smaps.init())
         .pipe(sass({
             precision: 10,
             onError: console.error.bind(console, 'Sass error:')
         }))
-        .pipe(ap(AUTOPREFIXER_BROWSERS));
+        .pipe(prefix(BROWSERS));
 
-    if (minify) {
+    if (MINIFY) {
        css = css
        .pipe(csso())
        .pipe(rename({
@@ -80,7 +55,7 @@ var render = function(layer){
 
     css = css
         .pipe(smaps.write('./'))
-        .pipe(gulp.dest(theme.css));
+        .pipe(gulp.dest(STYLE.CSS));
 
     return css;
 }
@@ -92,34 +67,28 @@ gulp.task('css', function(){
 
 gulp.task('svgo', function(){
     'use strict';
-    gulp.src('icons/development/*.svg')
-        .pipe(changed('icons/production'))
+    gulp.src(ICONS.DEV)
+        .pipe(changed(ICONS.PRO))
         .pipe(svgo(svgSettings))
-        .pipe(gulp.dest('icons/production'));
+        .pipe(gulp.dest(ICONS.PRO));
 });
 
 gulp.task('svg-store', function(){
     'use strict';
-    gulp.src('icons/production/*.svg')
-        .pipe(changed('docs/views'))
+    gulp.src(ICONS.PRO)
+        .pipe(changed(ICONS.VIEW))
         .pipe(svgstore())
         .pipe(rename({
             basename: 'icons',
-            extname: '.twig'
+            extname: '.html'
         }))
-        .pipe(gulp.dest('docs/views'));
-});
-
-gulp.task('clean', function(){
-    'use strict';
-    del(['guide']);
-    del([theme.css]);
+        .pipe(gulp.dest(ICONS.VIEW));
 });
 
 gulp.task('watch', function(){
     'use strict';
-    gulp.watch('docs/assets/**/*.scss', ['css']);
-    gulp.watch('icons/development/*', ['svgo', 'svg-store']);
+    gulp.watch(STYLE.SCSS + '**/*.scss', ['css']);
+    gulp.watch(ICONS.DEV, ['svgo', 'svg-store']);
 });
 
 gulp.task('serve', ['watch']);
