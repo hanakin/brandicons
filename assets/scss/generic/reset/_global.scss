@@ -1,0 +1,121 @@
+//------------------------------------------------------------------------------
+// @generic: Global
+//------------------------------------------------------------------------------
+// @description:
+//
+// A thin layer on top of normalize.css that provides a starting point more
+// suitable for web applications.
+//
+// 1.  Force scrollbars to always be visible to prevent awkward ‘jumps’ when
+//     navigating between pages that do/do not have enough content to produce
+//     scrollbars naturally.
+// 2.  Ensure the page always fills at least the entire height of the viewport.
+// 3.  Fonts on OSX will look more consistent with other systems that do not
+//     render text using sub-pixel anti-aliasing.
+// 4.  Changes the default tap highlight to be completely transparent in iOS.
+// 5.  Set touch-action to avoid touch delay on mobile IE
+// 6.  Make html take up the entire screen
+// 7.  Removes the default spacing and border for appropriate elements.
+// 8.  Remove the gap between audio, canvas, iframes,
+//     images, videos and the bottom of their containers:
+//     see: https://github.com/h5bp/html5-boilerplate/issues/440
+// 9.  Avoid 300ms click delay on touch devices that support the `touch-action`
+//     CSS property.
+//     See:
+//     * http://caniuse.com/#feat=css-touch-action
+//     * http://patrickhlauke.github.io/touch/tests/results/#suppressing-300ms-delay
+// 10. Remove text-shadow in selection highlight:
+//     see: https://twitter.com/miketaylr/status/12228805301
+//
+// 11. These selection rule sets have to be separate. Customize the background
+//     color to match your design.
+// 12. Use current current as the default fill of svg elements
+// 13. Specify the progress cursor of updating elements
+// 14. Specify the pointer cursor of trigger elements
+// 15. Specify the unstyled cursor of disabled, not-editable, or otherwise
+//     inoperable elements
+// 16. Specify the style of visually hidden yet accessible elements
+//------------------------------------------------------------------------------
+
+//
+// @scss
+html {
+    -moz-osx-font-smoothing: grayscale; // [3]
+     -webkit-font-smoothing: antialiased; /* stylelint-disable-line indentation */
+    height: 100%; // [6]
+    min-height: 100%; // [2]
+    -ms-overflow-style: -ms-autohiding-scrollbar; // [1] Edge 12+, IE 11
+    overflow-y: scroll; // [1]
+    width: 100%; // [6]
+    -ms-touch-action: manipulation; // [5]
+        touch-action: manipulation; /* stylelint-disable-line indentation */
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0); // [4]
+}
+
+body {
+    min-height: 100%;
+    width: 100%;
+}
+
+iframe {
+    border: 0; // [7]
+}
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+    vertical-align: middle; // [8]
+}
+
+a,
+area,
+button,
+[role='button'],
+input,
+label,
+select,
+summary,
+textarea
+[tabindex] {
+    touch-action: manipulation; // [9]
+}
+
+::-moz-selection {
+    text-shadow: none; // [10]
+    background: $blue-200; // [11]
+}
+
+::selection {
+    text-shadow: none;
+    background: $blue-200;
+    color: #ffffff;
+}
+
+svg {
+    fill: currentColor; // [12]
+}
+
+[aria-busy='true'] {
+    cursor: progress; // [13]
+}
+
+[aria-controls] {
+    cursor: pointer; // [14]
+}
+
+[aria-disabled] {
+    cursor: default; // [15]
+}
+
+[hidden][aria-hidden='false'] {
+    clip: rect(0 0 0 0); // [16]
+    display: inherit; // [16]
+    position: absolute; // [16]
+
+    &:focus {
+        clip: auto; // [16]
+    }
+}

@@ -1,0 +1,33 @@
+//------------------------------------------------------------------------------
+// @object: Tag
+//------------------------------------------------------------------------------
+// @description
+//
+// 1. Empty tags collapse automatically
+//------------------------------------------------------------------------------
+
+//
+// @settings
+$tag-border-radius: $default-border-radius !default;
+$tag-background-color: $default-gray !default;
+$tag-color: $default-gray-dark !default;
+
+//
+// @scss
+.o-tag {
+    text-align: center;
+    vertical-align: middle;
+    @media (min-width: $bp-medium) {
+        white-space: nowrap;
+    }
+    background-color: $tag-background-color;
+    border-radius: $tag-border-radius;
+    color: $tag-color;
+    display: inline-block;
+    margin-left: rem(8);
+    padding: rem(2px) rem(4px);
+
+    &:empty {
+        display: none; // [1]
+    }
+}

@@ -22,14 +22,14 @@ var BROWSERS = [
     'ios >= 8'
 ],
 STYLE = [
-    SCSS = 'docs/assets/scss/',
-    CSS = 'docs/assets/css'
+    SCSS = 'assets/scss/',
+    CSS = 'demo/'
 ],
 MINIFY = true,
 ICONS = [
     DEV = 'icons/development/*',
     PRO = 'icons/production',
-    VIEW = 'docs/views'
+    VIEW = 'demo'
 ];
 
 var render = function(layer){
