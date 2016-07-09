@@ -21,22 +21,18 @@ var BROWSERS = [
     'opera >= 35',
     'ios >= 8'
 ],
-STYLE = [
-    SCSS = 'assets/scss/',
-    CSS = 'demo/'
-],
+SCSS = 'assets/scss/',
+CSS = 'demo/'
 MINIFY = true,
-ICONS = [
-    DEV = 'icons/development/*',
-    PRO = 'icons/production',
-    VIEW = 'demo'
-];
+DEV = 'icons/development/*',
+PRO = 'icons/production/',
+VIEW = 'demo/';
 
 var render = function(layer){
     'use strict';
 
     var css = gulp
-        .src(STYLE.SCSS + layer + '.scss')
+        .src(SCSS + layer + '.scss')
         .pipe(smaps.init())
         .pipe(sass({
             precision: 10,
@@ -55,7 +51,7 @@ var render = function(layer){
 
     css = css
         .pipe(smaps.write('./'))
-        .pipe(gulp.dest(STYLE.CSS));
+        .pipe(gulp.dest(CSS));
 
     return css;
 }
@@ -67,28 +63,28 @@ gulp.task('css', function(){
 
 gulp.task('svgo', function(){
     'use strict';
-    gulp.src(ICONS.DEV)
-        .pipe(changed(ICONS.PRO))
+    gulp.src(DEV)
+        .pipe(changed(PRO))
         .pipe(svgo(svgSettings))
-        .pipe(gulp.dest(ICONS.PRO));
+        .pipe(gulp.dest(PRO));
 });
 
 gulp.task('svg-store', function(){
     'use strict';
-    gulp.src(ICONS.PRO)
-        .pipe(changed(ICONS.VIEW))
+    gulp.src(PRO)
+        .pipe(changed(VIEW))
         .pipe(svgstore())
         .pipe(rename({
             basename: 'icons',
             extname: '.html'
         }))
-        .pipe(gulp.dest(ICONS.VIEW));
+        .pipe(gulp.dest(VIEW));
 });
 
 gulp.task('watch', function(){
     'use strict';
-    gulp.watch(STYLE.SCSS + '**/*.scss', ['css']);
-    gulp.watch(ICONS.DEV, ['svgo', 'svg-store']);
+    gulp.watch(SCSS + '**/*.scss', ['css']);
+    gulp.watch(DEV, ['svgo', 'svg-store']);
 });
 
 gulp.task('serve', ['watch']);
