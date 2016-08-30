@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <!-- META -->
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="A set of brand  &amp; social icons made to fit and mirror the google material design icons. These icons are meant to be coupled with the MDI to offset the lack of brand &amp; social options.">
+    <meta name="author" content="icons, brand, social, material, goolge, design">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Brandicons - Demo</title>
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <!-- STYLES -->
+    <link rel="stylesheet" type="text/css" href="css/style.min.css" media="all" />
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.0.0.min.js"><\/script>')</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script>window.angular || document.write('<script src="js/vendor/angular.min.js"><\/script>')</script>
+    <script src="js/vendor/app.js"></script>
+</head>
+<body ng-app="appBrandicons">
+    {% include "brandicons.html" %}
+    {% include "mdi.html" %}
+    <header class="hero">
+        <hgroup class="hero-container container">
+            <div class="hero-header">
+                <!-- <img src="dist/assets/imgs/bas-el_logo.svg" height="48px" alt="Bas-El" /> -->
+            </div>
+            <div class="hero-body o-grid">
+                <h1 class="hero-heading">
+                    Brand & Social Icons
+                    <p class="hero-copy">
+                        made to fit and be coupled with the google material design icons.
+                    </p>
+                </h1>
+            </div>
+            <nav class="hero-nav">
+                <a class="o-btn" href="#">
+                    <svg class="icon"><use xlink:href="#github"></use></svg>
+                    <span class="sr-only">Github</span>
+                </a>
+                <a class="o-btn" href="#">
+                    <svg class="icon"><use xlink:href="#cloud_download"></use></svg>
+                    <span class="sr-only">Download</span>
+                </a>
+                <a class="o-btn" href="#">Docs</a>
+                <a class="o-btn" href="#">About</a>
+            </nav>
+        </hgroup>
+    </header>
+    <icons></icons>
+</body>
+</html>
