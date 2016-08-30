@@ -36,6 +36,14 @@ var BROWSERS = [
     DEMO = 'demo/';
     VIEW = 'src/views';
 
+function getFolders(dir){
+    return fs.readdirSync(dir)
+        .filter(function(file) {
+            return fs.statSync(path.join(dir, file)).isDirectory();
+        });
+}
+
+
 var render = function(layer){
     'use strict';
 
