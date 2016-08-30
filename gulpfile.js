@@ -27,13 +27,6 @@ var BROWSERS = [
     MINIFY = true,
     DEV = 'src/icons/development/**/*',
     PRO = 'src/icons/production/',
-    SECTIONS = [
-        'brands',
-        'mdi',
-        'primary-nav'
-    ],
-    VIEW = 'src/views',
-    DEMO = 'demo/';
     VIEW = 'src/views';
 
 function getFolders(dir){
@@ -72,24 +65,10 @@ var render = function(layer){
     return stream;
 };
 
-gulp.task('svgo', function(){
+gulp.task('css', function(){
     'use strict';
-    var stream = gulp;
-    for(var i=0; i < SECTIONS.length; i++){
-        stream = stream.src(DEV + '/' + SECTIONS[i])
-            .pipe(changed(PRO + '/' + SECTIONS[i]))
-            .pipe(svgmin(svgSettings))
-            .pipe(cheerio({
-                run: function ($) {
-                    $('[fill]').removeAttr('fill');
-                    $('[fill-rule]').removeAttr('fill-rule');
-                },
-                parserOptions: { xmlMode: true }
-            }))
-            .pipe(gulp.dest(PRO + '/' + SECTIONS[i]));
-    }
-
-    return stream;
+    render('style');
+});
 
 });
 
