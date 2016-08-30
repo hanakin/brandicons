@@ -25,7 +25,7 @@ var BROWSERS = [
     SCSS = 'src/assets/scss/',
     CSS = 'demo/css',
     MINIFY = true,
-    DEV = 'src/icons/development/*',
+    DEV = 'src/icons/development/**/*',
     PRO = 'src/icons/production/',
     SECTIONS = [
         'brands',
