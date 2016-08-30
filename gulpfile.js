@@ -6,9 +6,10 @@ var gulp        = require('gulp'),
     csso        = require('gulp-csso'),
     changed     = require('gulp-changed'),
     cheerio     = require('gulp-cheerio'),
-    swig        = require('gulp-swig'),
     svgmin      = require('gulp-svgmin'),
     svgstore    = require('gulp-svgstore'),
+    fs          = require('fs'),
+    path        = require('path'),
     svgSettings = require('./.svgorc.json');
 
 // Config
