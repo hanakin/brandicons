@@ -1,0 +1,37 @@
+//------------------------------------------------------------------------------
+// @generic: Tables
+//------------------------------------------------------------------------------
+// @description:
+//
+// 1. Reset for nesting within parents with `background-color`.
+// 2. No longer part of Normalize since v4
+// 3. Centered by default, but left-aligned to match the `td`s below.
+//------------------------------------------------------------------------------
+
+//
+// @scss
+table {
+    @include vertical-rhythm();
+    background-color: transparent; // [1]
+    border-spacing: 0; // from inuit
+    border-collapse: collapse; // [2]
+    width: 100%;
+}
+
+caption {
+    text-align: left;
+    color: $default-gray;
+    caption-side: bottom;
+    margin: 0;
+    padding: rem(8px) 0;
+}
+
+th {
+    text-align: left; // [3]
+}
+
+th,
+td {
+    margin: 0;
+    padding: $default-line-height / 2;
+}

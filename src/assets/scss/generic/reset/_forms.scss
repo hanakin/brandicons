@@ -1,0 +1,197 @@
+//------------------------------------------------------------------------------
+// @generic: Forms
+//------------------------------------------------------------------------------
+// @description:
+//
+// 1.  iOS 'clickable elements' fix for role='button'
+//     Fixes 'clickability' issue (and more generally, the firing of events such
+//     as focus as well) for traditionally non-focusable elements with
+//     role='button'
+//     see https://developer.mozilla.org/en-US/docs/Web/Events/click#Safari_Mobile
+// 2.  Work around a Firefox/IE bug where the transparent `button` background
+//     results in a loss of the default `button` focus styles.
+// 3.  Normalize includes `font: inherit;`, so `font-family`. `font-size`, etc
+//     are properly inherited. However, `line-height` isn't addressed there.
+//     Using this ensures we don't need to unnecessarily redeclare the global
+//     font stack.
+// 4.  iOS adds rounded borders by default
+// 5.  Ensure all elements have same inital alignment
+// 6.  Allow labels to use `margin` for spacing.
+// 7.  Chrome and Firefox set a `min-width: min-content;` on fieldsets,
+//     so we reset that to ensure it behaves more like a standard block element.
+//     see https://github.com/twbs/bootstrap/issues/12359.
+// 8.  radios nor checkboxes require slight spacing on the right to account for
+//     labels.
+// 9.  Apply a disabled cursor for radios and checkboxes.
+//     Note: Neither radios nor checkboxes can be readonly.
+// 10. Remove the default appearance of temporal inputs to avoid a Mobile Safari
+//     bug where setting a custom line-height prevents text from being vertically
+//     centered within the input.
+//     Bug report: https://github.com/twbs/bootstrap/issues/11266
+// 11. This overrides the extra rounded corners on search inputs in iOS so that our
+//     `.form-control` class can properly style them. Note that this cannot simply
+//     be added to `.form-control` as it's not specific enough. For details, see
+//     see: https://github.com/twbs/bootstrap/issues/11586.
+// 12. Specify the minimum height of form elements
+// 13. Align when inline to top for better conssistant alignments.
+// 14. Allow only vertical resizing of textareas.
+// 15. Specify the standard appearance of selects
+//------------------------------------------------------------------------------
+
+//
+// @scss
+form {
+    @include vertical-rhythm();
+    padding: 0;
+}
+
+//
+
+//
+[role='button'] {
+    cursor: pointer; // [1]
+}
+
+//
+
+//
+button {
+    background: transparent;
+    border: 1px solid $default-gray;
+    cursor: pointer;
+    padding: rem(2px) rem(4px);
+
+    &:focus {
+        outline: 1px dotted; // [2]
+        outline: 4px auto -webkit-focus-ring-color; // [2]
+    }
+}
+
+input,
+button,
+select,
+optgroup,
+textarea {
+    line-height: inherit; // [3]
+    vertical-align: middle; // [5]
+    background-clip: padding-box;
+    background-color: transparent;
+    background-image: none; // [4]
+    -webkit-border-radius: 0; // [4] iOS 8+
+    border-radius: 0; // [4]
+    color: inherit;
+}
+
+label {
+    display: inline-block;
+    margin: 0 rem(8px) 1rem; // [6]
+}
+
+fieldset {
+    border: 0;
+    @include vertical-rhythm();
+    padding: 0;
+    min-width: 0; // [7]
+}
+
+legend {
+    @include type($type: 'headline');
+    display: block;
+    margin: 0 0 1rem;
+    width: 100%;
+}
+
+input[type='radio'],
+input[type='checkbox'] {
+    margin-right: rem(8px); // [8]
+
+    &:disabled {
+        cursor: not-allowed; // [9]
+    }
+}
+
+input[type='date'],
+input[type='time'],
+input[type='datetime-local'],
+input[type='month'] {
+    -webkit-appearance: listbox; // [10]
+}
+
+//
+
+//
+input[type='search'] {
+    -webkit-appearance: none; // [11]
+}
+
+// todo: needed?
+output {
+    display: inline-block;
+}
+
+button,
+[type='button'],
+[type='date'],
+[type='datetime'],
+[type='datetime-local'],
+[type='email'],
+[type='month'],
+[type='number'],
+[type='password'],
+[type='reset'],
+[type='search'],
+[type='submit'],
+[type='tel'],
+[type='text'],
+[type='time'],
+[type='url'],
+[type='week'],
+[type='color'],
+select,
+textarea {
+    min-height: rem(24px); // [12]
+}
+
+input[type='color'] {
+    vertical-align: middle;
+    padding: rem(4px);
+
+}
+
+select[multiple='multiple'] {
+    height: auto;
+}
+
+select[multiple='multiple'],
+textarea {
+    vertical-align: top; // [13]
+}
+
+textarea {
+    resize: vertical; // [14]
+}
+
+select {
+    -moz-appearance: none; // [15] Firefox 40+
+    -webkit-appearance: none; // [15] Chrome 45+
+
+    &::-ms-expand {
+        background-color: transparent; // [15] IE10+
+        border: 0; // [15] IE10+
+        display: none; // [15] Edge 12+, Internet Explorer 11-
+    }
+
+    &::-ms-value {
+        color: currentColor; // [15] Edge 12+, Internet Explorer 11-
+    }
+}
+
+[type='number']::-webkit-inner-spin-button,
+[type='number']::-webkit-outer-spin-button {
+    height: auto;
+}
+
+[type='date']::-webkit-inner-spin-button {
+    display: none;
+    -webkit-appearance: none;
+}

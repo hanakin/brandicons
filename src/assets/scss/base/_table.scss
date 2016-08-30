@@ -1,0 +1,102 @@
+//------------------------------------------------------------------------------
+// @base: Tables
+//------------------------------------------------------------------------------
+// @description:
+//
+//------------------------------------------------------------------------------
+
+//
+// @settings
+$table-header-color: rgba($black, 0.54);
+$table-divider-color: rgba($black, 0.12);
+
+$table-hover-color: $gray-200;
+$table-selection-color: $default-gray-light;
+
+$table-dividers: 1px solid $table-divider-color;
+
+$table-row-height: rem(48px);
+$table-last-row-height: rem(56px);
+$table-header-height: rem(56px);
+
+$table-column-spacing: rem(36px);
+$table-column-padding: $table-column-spacing / 2;
+
+$table-card-header-height: rem(64px);
+$table-card-title-top: rem(20px);
+$table-card-padding: rem(24px);
+$table-button-padding-right: 1rem;
+$table-cell-top: $table-card-padding / 2;
+
+
+//
+// @scss
+table {
+    @include font-size(13px);
+    white-space: nowrap;
+    background-color: $white;
+    border: $table-dividers;
+    // border-collapse: collapse;
+    display: block;
+    @media (min-width: $bp-medium) {
+        display: table;
+    }
+    overflow-x: auto;
+    width: 100%;
+    @media (min-width: $bp-medium) {
+        width: auto;
+    }
+
+
+    thead {
+        padding-bottom: rem(4px);
+    }
+
+    tbody {
+        tr {
+            height: $table-row-height;
+            position: relative;
+            transition: background-color 0.28s $default-animation-curve;
+
+            &.is-selected {
+                background-color: $table-selection-color;
+            }
+
+            &:hover {
+                background-color: $table-hover-color;
+            }
+        }
+    }
+
+    td,
+    th {
+        text-align: right;
+        box-sizing: border-box;
+        height: $table-row-height;
+        padding: 0 $table-column-padding;
+        // position: relative;
+
+        &:first-of-type {
+            padding-left: $table-card-padding;
+        }
+
+        &:last-of-type {
+            padding-right: $table-card-padding;
+        }
+    }
+
+    td {
+        vertical-align: top;
+        border-top: $table-dividers;
+        border-bottom: $table-dividers;
+        padding-top: $table-cell-top;
+    }
+
+    th {
+        @include type($type: 'body2');
+        text-overflow: ellipsis;
+        vertical-align: bottom;
+        color: $table-header-color;
+        padding-bottom: rem(8px);
+    }
+}

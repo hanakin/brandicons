@@ -1,0 +1,9 @@
+<input id="search" type="search" placeholder="Search" class="" data-ng-model="search.name">
+<div class="icons">
+    <ul class="icon-grid">
+        <li ng-repeat="name in icons | filter:search" class="icon-block">
+            <svg class="icon"><use xlink:href="#{{name}}"></use></svg>
+            <span class="icon-label">{{name}}</span>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,145 @@
+//------------------------------------------------------------------------------
+// @object: Button
+//------------------------------------------------------------------------------
+// @description
+//
+// This is a simple button object for styling the various forms of buttons
+// across a design and throughout various components. To adjest the temee of a
+// button within a component, use a theme modifier such as `.t-btn-navbar`
+//
+// 1. Allow us to style box model properties.
+// 2. Line different sized buttons up a little nicer.
+// 3. Make buttons inherit font styles (often necessary when styling `input`s as
+//    buttons).
+// 4. Reset/normalize some styles.
+// 5. Force all button-styled elements to appear clickable.
+// 6. Fixes odd inner spacing in IE7.
+// 7. Subtract the border size from the padding value so that buttons do not
+//    grow larger as we add borders.
+// 8. Prevent button text from being selectable.
+// 9. Most commonly we want specific sizing and alignment for icons in links
+// as such we target tthe most common approaches to including icons
+// 10. Remove excess padding and border in Firefox 4+
+//
+// @exp
+//
+// <button class="o-btn">Submite</button>
+// <input type="submit" class="o-btn" value="Submit" />
+// <a class="o-btn">Submit</a>
+// <a class="o-btn">
+//    <svg class="icon">
+//        <use xlink:href="#add_circle"></use>
+//    </svg>
+//    Add
+// </a>
+// <a class="o-btn">
+//    Remove
+//    <svg class="icon">
+//        <use xlink:href="#remove_circle">Add</use>
+//    </svg>
+// </a>
+//------------------------------------------------------------------------------
+
+//
+// @settings
+
+// Layout Variables
+$btn-border-size: $default-border-size !default;
+$btn-padding: 1rem !default;
+$btn-border-radius: $default-border-radius !default;
+$btn-min-width: rem(64px) !default;
+$btn-height: rem(38px) !default;
+
+// Default Theme Variables
+$btn-background-color: $white !default;
+$btn-hover-color: $default-primary-dark-color !default;
+$btn-active-color: $btn-hover-color !default;
+$btn-focus-color: $btn-hover-color !default;
+$btn-color: $default-gray-dark !default;
+$btn-border-style: solid !default;
+$btn-border-color: $default-gray !default;
+
+
+//
+// @scss
+.o-btn {
+    @include type($type: 'button');
+    line-height: $btn-height; // google material design
+    text-align: center; // [4]
+    text-decoration: none; // [4]
+    vertical-align: middle; // [2]
+    white-space: nowrap; // bs only
+    background-color: $btn-background-color;
+    border-width: $btn-border-size;
+    border-style: $btn-border-style;
+    border-color: $btn-border-color;
+    border-radius: $btn-border-radius;
+    // @include shadow-2dp();
+    color: $btn-color;
+    outline: none; // google material design
+    cursor: pointer;
+    user-select: none; // [8]
+    display: inline-block; // [1]
+    margin: 0; // [4]
+    padding: 0 $btn-padding; // [7]
+    overflow: visible; // [6]
+    min-width: $btn-min-width; // google material design
+    transition:
+        box-shadow 0.2s $animation-curve-fast-out-linear-in,
+        background-color 0.2s $default-animation-curve,
+        color 0.2s $default-animation-curve; // google material design
+
+    // Icons [9]
+    i,
+    svg {
+        @include font-size(24px, false);
+        margin-right: 0.5rem;
+    }
+
+    i {
+        vertical-align: bottom;
+    }
+
+    svg {
+        vertical-align: middle;
+    }
+
+    // UI states
+    &:hover,
+    &:focus,
+    &:active {
+        text-decoration: none;  // [4]
+        color: $btn-color;
+        outline: none;
+    }
+
+    &:hover {
+        border-color: $btn-hover-color;
+        // @include shadow-4dp();
+    }
+
+    &:focus {
+        border-color: $btn-hover-color;
+        // @include focus-shadow();
+    }
+
+    &:active {
+        background-color: $btn-active-color;
+        background-image: none;
+        border-color: $btn-hover-color;
+        color: $btn-background-color;
+        // @include shadow-4dp();
+    }
+
+    &:disabled {
+        background-color: transparent;
+        box-shadow: none;
+        cursor: default;
+    }
+
+    //
+    &::-moz-focus-inner {
+        border: 0; // [10]
+        padding: 0; // [10]
+    }
+}
