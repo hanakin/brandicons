@@ -70,6 +70,19 @@ gulp.task('css', function(){
     render('style');
 });
 
+gulp.task('svgmin', function(){
+    'use strict';
+    gulp.src(DEV)
+        .pipe(changed(PRO))
+        .pipe(svgmin(svgSettings))
+        .pipe(cheerio({
+            run: function ($) {
+                $('[fill]').removeAttr('fill');
+                $('[fill-rule]').removeAttr('fill-rule');
+            },
+            parserOptions: { xmlMode: true }
+        }))
+        .pipe(gulp.dest(PRO));
 });
 
 gulp.task('svg-store', function(){
