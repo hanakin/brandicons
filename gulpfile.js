@@ -34,6 +34,7 @@ var BROWSERS = [
     ],
     VIEW = 'src/views',
     DEMO = 'demo/';
+    VIEW = 'src/views';
 
 var render = function(layer){
     'use strict';
