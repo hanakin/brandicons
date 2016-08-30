@@ -87,30 +87,25 @@ gulp.task('svgmin', function(){
 
 gulp.task('svg-store', function(){
     'use strict';
-    var stream = gulp;
-    for(var i=0; i < SECTIONS.length; i++){
-        stream = stream.src(PRO + '/' + SECTIONS[i])
-            .pipe(changed(VIEW + '/' + SECTIONS[i] + '.html'))
+    var folders = getFolders(PRO);
+    return folders.map(function(folder){
+        return gulp.src(PRO + folder + '/*')
+            // .pipe(changed(VIEW))
             .pipe(svgstore())
             .pipe(cheerio({
                 run: function ($) {
-                    $('xml').remove();
-                    // $('!DOCTYPE').remove();
-                    $('svg').attr('class',  SECTIONS[i]);
-                    $('svg').attr('style',  'position: absolute; width: 0; height: 0;');
+                    var svg = $('svg')
+                        .attr('class',  folder)
+                        .attr('style',  'position: absolute; width: 0; height: 0;');
+                    $.root().empty().append(svg);
                 },
                 parserOptions: { xmlMode: true }
             }))
             .pipe(rename({
-                basename: SECTIONS[i],
+                basename: folder,
                 extname: '.html'
             }))
             .pipe(gulp.dest(VIEW));
-    }
-
-    return stream;
-
-});
 
 var svgClean = function(type, src, dest){
     'use strict';
