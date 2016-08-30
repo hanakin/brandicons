@@ -106,72 +106,14 @@ gulp.task('svg-store', function(){
                 extname: '.html'
             }))
             .pipe(gulp.dest(VIEW));
-
-var svgClean = function(type, src, dest){
-    'use strict';
-
-    var stream = gulp
-        .src(src)
-        .pipe(changed(PRO + type))
-        .pipe(svgmin(svgSettings))
-        .pipe(rename(function(path){
-            path.dirname = '/';
-            // remove usless prefix/suffix.
-            if (type == 'mdi') {
-                path.basename = path.basename.slice(3, -5);
-            }
-        }))
-
-        .pipe(gulp.dest(dest)); // PRO + 'mdi/'
-
-    return stream;
-
-};
-
-var svgTemp = function(type, src, dest){
-    'use strict';
-    var stream = gulp
-        .src(src)
-        .pipe(svgstore())
-        .pipe(cheerio({
-            run: function ($) {
-                $('xml').remove();
-                // $('!DOCTYPE').remove();
-                $('svg').attr('class',  type);
-                $('svg').attr('style',  'position: absolute; width: 0; height: 0;');
-            },
-            parserOptions: { xmlMode: true }
-        }))
-        .pipe(rename({
-            basename: type,
-            extname: '.html'
-        }))
-        .pipe(gulp.dest(dest));
-
-    return stream;
-};
-
-gulp.task('css', function(){
-    'use strict';
-    render('style');
-});
-
-gulp.task('views', ['build'], function() {
-    'use strict';
-    var stream = gulp
-        .src(VIEW + '/*.twig')
-        .pipe(swig())
-        .pipe(gulp.dest(DEMO));
-
-    return stream;
+    });
 });
 
 gulp.task('watch', function(){
     'use strict';
     gulp.watch(SCSS + '**/*.scss', ['css']);
-    gulp.watch(DEV, ['svgo', 'svg-store']);
-    gulp.watch(VIEW + '*', ['views']);
+    gulp.watch(DEV, ['svgmin', 'svg-store']);
 });
 
 gulp.task('serve', ['watch']);
-gulp.task('default', ['css', 'svgo', 'svg-store', 'views', 'watch']);
+gulp.task('default', ['css', 'svgmin', 'svg-store', 'watch']);
