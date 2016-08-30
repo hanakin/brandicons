@@ -1,4 +1,4 @@
-# brandicons [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url]
+# brandicons [![Build Status](https://secure.travis-ci.org/hanakin/brandicons.png?branch=master)](http://travis-ci.org/hanakin/brandicons)  [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url]
 ### a set of brand  & social icons made to fit and mirror the google material design icons. These icons are meant to be coupled with the MDI to offset the lack of brand & social options.
 
 
