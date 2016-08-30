@@ -1,6 +1,4 @@
 {
-    "multipass": true,
-    "full": true,
     "plugins": [
         { "cleanupAttrs": true },
         { "cleanUpEnableBackground": true },
