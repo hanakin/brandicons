@@ -37,6 +37,7 @@
 
 ##Changelog
 - 1.0.1 cleaner gulpfile & folder structure. improved readme.
+- 2.0.0 improved process to accomodate page specific icons & moved documentation to its own branch.
 [Detailed changelog & contributors](/CHANGELOG.md)
 
 Note: All brand icons are trademarks of their respective owners. The use of these trademarks does not indicate endorsement of the trademark holder by the author, nor vice versa.
