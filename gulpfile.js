@@ -9,6 +9,7 @@ var gulp        = require('gulp'),
     svgmin      = require('gulp-svgmin'),
     svgstore    = require('gulp-svgstore'),
     fs          = require('fs'),
+    del         = require('del'),
     path        = require('path'),
     svgSettings = require('./.svgorc.json');
 
@@ -70,7 +71,27 @@ gulp.task('css', function(){
     render('style');
 });
 
-gulp.task('svgmin', function(){
+gulp.task('clean', function () {
+	del([VIEW + '*.html']);
+});
+
+gulp.task('sanatize', function () {
+
+    var stream = gulp
+        .src('src/icons/development/mdi/ic_*.svg')
+        .pipe(rename(function (path) {
+            path.basename = path.basename.slice(3, (path.basename.length - 5))
+            return path;
+        }))
+        .pipe(gulp.dest('src/icons/development/mdi/'));
+
+    del(['src/icons/development/mdi/ic_*.svg']);
+
+    return stream;
+
+});
+
+gulp.task('svgmin', ['sanatize'], function(){
     'use strict';
     gulp.src(DEV)
         .pipe(changed(PRO))
@@ -85,7 +106,7 @@ gulp.task('svgmin', function(){
         .pipe(gulp.dest(PRO));
 });
 
-gulp.task('svg-store', function(){
+gulp.task('svg-store', ['clean'], function(){
     'use strict';
     var folders = getFolders(PRO);
     return folders.map(function(folder){
