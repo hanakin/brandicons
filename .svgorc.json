@@ -27,7 +27,7 @@
         { "removeMetadata": true },
         { "removeNonInheritableGroupAttrs": true },
         { "removeRasterImages": true },
-        { "removeTitle": true },
+        { "removeTitle": false },
         { "removeUnknownsAndDefaults": true },
         { "removeUselessDefs": true },
         { "removeUnusedNS": true },
